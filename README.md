@@ -16,8 +16,6 @@ Setting up the RF circuit requires the following components:
 Ultimately what we want to do here is to arrange the components in the following circuit
 <circuit diagram>
 
-
-
 ### Audio Interface
 Once the Raspberry is
 The Audio Interface comprises of a USB microphone attached to a Raspberry Pi which records audio and transcribes it via Watson's Speech to Text service. To ensure that audio is recorded and transcribed only as needed, we've leveraged a "Hotword" detection service named [Snowboy](https://snowboy.kitt.ai/), which listens for a specific speech pattern (**Hello Watson**, in this case), and begins recording once the hotword pattern is detected. The steps required to create a voice model can be found [here](http://docs.kitt.ai/snowboy/)
@@ -31,10 +29,14 @@ The Audio Interface comprises of a USB microphone attached to a Raspberry Pi whi
 
 A Bluemix Account is required to provision these services. Each can be found by going to the [Bluemix Service Catalog](https://console.ng.bluemix.net/catalog), searching for the name of the service, and then clicking the "Create" button on the lower right corner.
 
-### Conversation
-The [Conversation](https://www.ibm.com/watson/developercloud/conversation.html) service is used to analyze natural language and determine which action(s) to take based on the user input. There are two main concepts to understand here. The first are referred to as "Intents", which determine what the user would like the application to do. Next, we have "Entities", which provide context of where the intent should be applied. To keep things simple, we have two intents, one is titled "turnoff", the other "turnon". Next, we have 3 entities, which are household devices that we'd like to turn off and on in this case. This pre-trained data model can be uploaded to the provisioned Conversation service through the UI, or through the following request
+Find Service
+![Find Service](/images/service_find.png "Find Service")
+Create Service
+![Create Service](/images/service_create.png "Create Service")
 
-`curl -X `
+
+### Conversation
+The [Conversation](https://www.ibm.com/watson/developercloud/conversation.html) service is used to analyze natural language and determine which action(s) to take based on the user input. There are two main concepts to understand here. The first are referred to as "Intents", which determine what the user would like the application to do. Next, we have "Entities", which provide context of where the intent should be applied. To keep things simple, we have two intents, one is titled "turnoff", the other "turnon". Next, we have 3 entities, which are household devices that we'd like to turn off and on in this case. This pre-trained data model can be uploaded to the provisioned Conversation service through the UI
 
 ### Watson IoT Platform
 The Watson IoT Platform will be utilized as a MQTT messaging broker. This is a lightweight publish/subscribe messaging protocol that'll allow for various devices such as a Phone, Laptop, and Microphone to
@@ -43,7 +45,7 @@ to forward user commands to control the Raspberry Pi. [Watson IoT Platform](#iot
 Once this service has been provisioned, we'll need to generate a set of credentials to securely access the MQTT broker.
 
 ### Openwhisk
-Openwhisk is a serverless framework which has the ability to bind snippets of code to REST API endpoints. Once these have been created, they can be called
+[Openwhisk](https://console.ng.bluemix.net/openwhisk) is a serverless framework which has the ability to bind snippets of code to REST API endpoints. Once these have been created, they can be called
 
 Once these snippets, or "Actions" have been created, they may be chained together as a sequence, as seen above in the architecture diagram.
 
